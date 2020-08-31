@@ -1,0 +1,127 @@
+<div class="container">
+  <div class="row" >
+    <div class="col-md-6 offset-md-3" style="background-color: white;    margin-top: 20px;
+    margin-bottom: 20px;">
+    <br>
+<h1>
+  Registration Form
+</h1>
+<hr>
+
+<form #userform="ngForm">
+  
+  <div class="form-group">
+    <label>Name<sup style="color:red;"><b>*</b></sup></label>
+    <input type="text" required #name="ngModel" [class.is-invalid]="name.invalid && name.touched" 
+    pattern="[a-zA-Z\s]{2,30}" class="form-control" name="fullname" [(ngModel)]="userModel.name">
+
+    <div *ngIf="name.errors && name.invalid && name.touched">
+      <small class="text-danger" *ngIf="name.errors.required">Name is required</small>      
+      <small class="text-danger" *ngIf="name.errors.pattern">Name should have characters only and length should be between 2 and 30</small>      
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label>Password<sup style="color:red;"><b>*</b></sup></label>
+    <input type="password" (blur)="validatePassword(cnfpassword.value,password.value)" (change)="validatePassword(cnfpassword.value,password.value)" required #password="ngModel" [class.is-invalid]="password.invalid && password.touched" 
+    pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" class="form-control" name="password" [(ngModel)]="userModel.password">
+
+    <div *ngIf="password.errors && password.invalid && password.touched">
+      <small class="text-danger" *ngIf="password.errors.required">Password is required</small>      
+      <small class="text-danger" *ngIf="password.errors.pattern">Password must contain 8 or more characters that are of at least one number, and one uppercase and lowercase letter</small>      
+    </div>
+  </div>
+
+   <div class="form-group">
+    <label>Confirm Password<sup style="color:red;"><b>*</b></sup></label>
+    <input type="password" (blur)="validatePassword(cnfpassword.value,password.value)" (change)="validatePassword(cnfpassword.value,password.value)" required 
+    #cnfpassword="ngModel" [class.is-invalid]="!cnfPasswordError && cnfpassword.touched" class="form-control" name="cnfpassword" [(ngModel)]="userModel.cnfpassword">
+
+    <div *ngIf= "!cnfPasswordError && cnfpassword.touched">
+      <small class="text-danger">Passwords do not match.</small>           
+    </div>
+    </div>
+
+  <div class="form-group">
+    <label>Email<sup style="color:red;"><b>*</b></sup></label>
+    <input type="email" required #email="ngModel" [class.is-invalid]="email.invalid && email.touched"
+    pattern="[a-z0-9._%+-]{3,}@[a-z0-9.-]+\.[a-z]{2,}$" class="form-control" placeholder="rob@gmail.com" name="email" [(ngModel)]="userModel.email">
+  
+    <div *ngIf="email.errors && email.invalid && email.touched">
+      <small class="text-danger" *ngIf="email.errors.required">Email is required</small>      
+      <small class="text-danger" *ngIf="email.errors.pattern">Email should be in the given format and should have 3 or more letters before @ and atleast 2 letters after . symbol</small>      
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label>Date Of Birth<sup style="color:red;"><b>*</b></sup></label>
+    <input type="date" required #dob="ngModel" (blur)="validatedob(dob.value)" 
+     [class.is-invalid]="!dobError" 
+     class="form-control"  name="dob" [(ngModel)]="userModel.dob">
+
+     <div *ngIf= "dob.errors && dob.touched">
+      <small class="text-danger">Date Of Birth is required</small>           
+    </div>
+
+    <div *ngIf= "!dobError && dob.touched">
+      <small class="text-danger">Age must be between 18 and 60</small>           
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label>Gender:</label><br>
+  <div class="form-check form-check-inline">
+    <input class="form-check-input" type="radio" [(ngModel)]="userModel.gender" name="gender" id="inlineRadio1" value="male">
+    <label class="form-check-label" for="inlineRadio1">Male</label>
+  </div>
+  <div class="form-check form-check-inline">
+    <input class="form-check-input" type="radio" [(ngModel)]="userModel.gender" name="gender" id="inlineRadio2" value="female">
+    <label class="form-check-label" for="inlineRadio2">Female</label>
+  </div>
+  <div class="form-check form-check-inline">
+    <input class="form-check-input" type="radio" [(ngModel)]="userModel.gender" name="gender" id="inlineRadio3" value="others">
+    <label class="form-check-label" for="inlineRadio3">Others</label>
+  </div>
+</div>
+
+<div class="form-group">
+  <label>Cell/Moblie<sup style="color:red;"><b>*</b></sup></label>
+  <input type="tel" required #phone="ngModel" pattern="^\d{10}$" 
+  [class.is-invalid]="phone.invalid && phone.touched" 
+  class="form-control" name="phone" [(ngModel)]="userModel.phone">
+
+  <div *ngIf="phone.errors && phone.invalid && phone.touched">
+    <small class="text-danger" *ngIf="phone.errors.required">Phone number is required</small>      
+    <small class="text-danger" *ngIf="phone.errors.pattern">Phone number must be 10 digits</small>      
+  </div>
+</div>
+
+  <div class="form-group">
+    <label>Education Category</label>
+    <select class="custom-select" name="education" [class.is-invalid]="education.invalid && education.touched" [(ngModel)]="userModel.education" required #education="ngModel">
+      <option value="">--Choose Option--</option>
+      <option *ngFor="let education of educations">{{education}}</option>
+    </select>
+    <small class="text-danger" [class.d-none]="education.valid || education.untouched">Please select the educational qualification.</small>
+  </div>
+
+  <div class="form-check mb-3">
+    <input class="form-check-input" required type="checkbox" name="terms" [(ngModel)]="userModel.terms">
+    <label class="form-check-label">
+      Yes, I agree to the
+      <a href="https://www.symphonytalent.com/en/terms-of-use/"> <u style="color: blue;">terms of use</u></a>
+       and 
+       <a href="https://www.symphonytalent.com/en/privacy/"> <u style="color: blue;">Privacy Policy</u></a>
+      <sup style="color:red;"><b>*</b></sup>
+    </label>
+  </div>
+ 
+ 
+
+
+<button [disabled]="userform.form.invalid" class="btn btn-primary" type="submit">Register</button><br><hr/>
+
+</form>
+</div>
+</div>
+</div>
