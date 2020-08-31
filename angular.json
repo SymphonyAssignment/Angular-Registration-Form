@@ -119,6 +119,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "registrationform"
+    }
+  },
+  "defaultProject": "registrationform",
+  "cli": {
+    "analytics": false
+  }
 }

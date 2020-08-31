@@ -11,7 +11,7 @@ export class AppComponent {
   educations=['Btech','Mtech','MCA','MBA'];
   cnfPasswordError= true;
   dobError=true;
-  userModel = new User('Ehraz','','','xyz@gmail.com',null,'',8877000205,'', true);
+  userModel = new User('','','','',null,'',null,'', false);
 
   validatePassword(value,value1){
     if(value=== value1)
@@ -22,10 +22,22 @@ export class AppComponent {
 
   }
 
-
   validatedob(value)
   {
-    console.log(value);
+    if(value!=null)
+    {
+    var s1 = value.split("-", 1);
+    var  s=s1[0];
+    var dobyear=parseInt(s);
+   // console.log(typeof(dobyear));
+    var curryear = new Date().getFullYear()
+    //console.log(typeof(curryear));
+    if((curryear-dobyear)>18 && (curryear-dobyear)<60)
+    this.dobError=true;
+    else
+    this.dobError=false;
+    console.log(this.dobError);
+    }
   }
 
 
