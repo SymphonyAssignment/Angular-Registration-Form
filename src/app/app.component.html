@@ -8,7 +8,7 @@
 </h1>
 <hr>
 
-<form #userform="ngForm">
+<form #userform="ngForm" novalidate (ngSubmit)="onSubmit()">
   
   <div class="form-group">
     <label>Name<sup style="color:red;"><b>*</b></sup></label>
@@ -123,5 +123,7 @@
 
 </form>
 </div>
+
 </div>
+<button (click)="f1()">Dummy</button>
 </div>

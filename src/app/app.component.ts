@@ -1,6 +1,12 @@
 import { Component } from '@angular/core';
 import { User } from './user';
 import { ConstantPool } from '@angular/compiler';
+import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import {UsersService} from './users.service'
+@Injectable({
+  providedIn:'root'
+})
 
 @Component({
   selector: 'app-root',
@@ -8,10 +14,16 @@ import { ConstantPool } from '@angular/compiler';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
+  
+  constructor(private user:UsersService){
+    this.user.getData().subscribe(data=>{
+      console.log(data)
+    })
+  }
   educations=['Btech','Mtech','MCA','MBA'];
   cnfPasswordError= true;
   dobError=true;
-  userModel = new User('','','','',null,'',null,'', false);
+  userModel = new User('Ehraz','','','xyz@gmail.com',null,'',8877000205,'', true);
 
   validatePassword(value,value1){
     if(value=== value1)
@@ -21,6 +33,7 @@ export class AppComponent {
     console.log(this.cnfPasswordError);
 
   }
+
 
   validatedob(value)
   {
@@ -39,6 +52,21 @@ export class AppComponent {
     console.log(this.dobError);
     }
   }
+
+
+  f1(){
+    fetch('http://localhost:8080/Regform/rest/candidate')
+            .then(result => {
+                 console.log(result);
+            })
+            .catch(error => console.log(error));
+    
+    }
+    onSubmit(){
+      console.log("hello");
+      console.log(this.userModel);
+    }
+  
 
 
 }
