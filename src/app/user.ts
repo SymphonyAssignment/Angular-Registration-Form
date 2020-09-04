@@ -6,8 +6,8 @@ export class User {
         public email: string,
         public dob: Date,
         public gender: string,
-        public phone: number,
+        public phone: string,
         public education: string,
-        public terms: boolean
+        public tnc: boolean
     ) {}
 }

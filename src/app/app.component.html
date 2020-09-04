@@ -86,7 +86,7 @@
 
 <div class="form-group">
   <label>Cell/Moblie<sup style="color:red;"><b>*</b></sup></label>
-  <input type="tel" required #phone="ngModel" pattern="^\d{10}$" 
+  <input type="text" required #phone="ngModel" pattern="^\d{10}$" 
   [class.is-invalid]="phone.invalid && phone.touched" 
   class="form-control" name="phone" [(ngModel)]="userModel.phone">
 
@@ -106,7 +106,7 @@
   </div>
 
   <div class="form-check mb-3">
-    <input class="form-check-input" required type="checkbox" name="terms" [(ngModel)]="userModel.terms">
+    <input class="form-check-input" required type="checkbox" name="tnc" [(ngModel)]="userModel.tnc">
     <label class="form-check-label">
       Yes, I agree to the
       <a href="https://www.symphonytalent.com/en/terms-of-use/"> <u style="color: blue;">terms of use</u></a>
@@ -123,7 +123,5 @@
 
 </form>
 </div>
-
 </div>
-<button (click)="f1()">Dummy</button>
 </div>

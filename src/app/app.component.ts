@@ -23,7 +23,7 @@ export class AppComponent {
   educations=['Btech','Mtech','MCA','MBA'];
   cnfPasswordError= true;
   dobError=true;
-  userModel = new User('Ehraz','','','xyz@gmail.com',null,'',8877000205,'', true);
+  userModel = new User('Ehraz','','','xyz@gmail.com',null,'','','',true);
 
   validatePassword(value,value1){
     if(value=== value1)
