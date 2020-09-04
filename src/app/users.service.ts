@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http'
 import { HttpHeaders } from '@angular/common/http';
+import { User } from './user';
 
 const headers= new HttpHeaders()
   .set('content-type', 'application/json')
@@ -10,10 +11,10 @@ const headers= new HttpHeaders()
   providedIn: 'root'
 })
 export class UsersService {
+ _url="http://localhost:8080/Regform/rest/candpost";
 
   constructor(private http:HttpClient) { }
-  getData(){
-    let url="http://localhost:8080/Regform/rest/candidate";
-    return this.http.get(url);
+  register(user: User){
+    return this.http.post<any>(this._url, user);
   }
 }

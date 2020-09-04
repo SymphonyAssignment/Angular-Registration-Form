@@ -15,15 +15,20 @@ import {UsersService} from './users.service'
 })
 export class AppComponent {
   
-  constructor(private user:UsersService){
-    this.user.getData().subscribe(data=>{
-      console.log(data)
-    })
-  }
+  constructor(private userService:UsersService){}
+
   educations=['Btech','Mtech','MCA','MBA'];
   cnfPasswordError= true;
   dobError=true;
   userModel = new User('Ehraz','','','xyz@gmail.com',null,'','','',true);
+
+  onSubmit(){
+      this.userService.register(this.userModel)
+      .subscribe(
+        data => console.log('Success',data),
+        error => console.log('error',error)
+      )
+  }
 
   validatePassword(value,value1){
     if(value=== value1)
@@ -62,10 +67,7 @@ export class AppComponent {
             .catch(error => console.log(error));
     
     }
-    onSubmit(){
-      console.log("hello");
-      console.log(this.userModel);
-    }
+    
   
 
 
