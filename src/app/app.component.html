@@ -1,4 +1,16 @@
-<div class="container">
+<div [style.display]="thankyouShowHide"> 
+  <h2 style="color: white;
+  font-family: 'Nunito', sans-serif;
+  text-align: center;
+  color: white;
+  padding: 200px; 
+  font-size: 300%;">Thank You For Registering with us.
+    <br>
+     We will stay in touch.
+     </h2>
+     </div>
+  
+     <div class="container" [style.display]="toggleShowHide">
   <div class="row" >
     <div class="col-md-6 offset-md-3" style="background-color: white;    margin-top: 20px;
     margin-bottom: 20px;">
@@ -8,7 +20,7 @@
 </h1>
 <hr>
 
-<form #userform="ngForm" novalidate (ngSubmit)="onSubmit()">
+<form #userform="ngForm" novalidate (ngSubmit)="onSubmit()" >
   
   <div class="form-group">
     <label>Name<sup style="color:red;"><b>*</b></sup></label>
@@ -44,10 +56,13 @@
 
   <div class="form-group">
     <label>Email<sup style="color:red;"><b>*</b></sup></label>
-    <input type="email" required #email="ngModel" [class.is-invalid]="email.invalid && email.touched"
+    <input type="email" required #email="ngModel" [class.is-invalid]="emailExist  && email.invalid && email.touched"
     pattern="[a-z0-9._%+-]{3,}@[a-z0-9.-]+\.[a-z]{2,}$" class="form-control" placeholder="rob@gmail.com" name="email" [(ngModel)]="userModel.email">
-  
-    <div *ngIf="email.errors && email.invalid && email.touched">
+    <div *ngIf="emailExist">
+      <small class="text-danger" >Oops.. This Email is already registered.</small> 
+    </div>
+    
+    <div *ngIf="email.errors && email.invalid && email.touched ">
       <small class="text-danger" *ngIf="email.errors.required">Email is required</small>      
       <small class="text-danger" *ngIf="email.errors.pattern">Email should be in the given format and should have 3 or more letters before @ and atleast 2 letters after . symbol</small>      
     </div>
